@@ -1,48 +1,301 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portofolio Joko Adenur</title>
-  <style>
-    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 0 auto; padding: 24px; line-height: 1.6; color: #222; }
-    header { text-align: center; margin-bottom: 32px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-    .card { border: 1px solid #ddd; border-radius: 10px; padding: 16px; }
-    .card h3 { margin: 0 0 8px; }
-    .card a { text-decoration: none; color: #0969da; }
-    .meta { font-size: 13px; color: #666; margin-top: 8px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joko Ade Nursiyono – Perjalanan lewat tata surya</title>
+<meta name="description" content="Portofolio interaktif Joko Ade Nursiyono: jelajahi paket R numspellR, bpsuseR, segmonR, dan lainnya sambil menjelajah tata surya.">
+<meta property="og:title" content="Joko Ade Nursiyono – Perjalanan lewat tata surya">
+<meta property="og:image" content="https://github.com/jokoadenur.png?size=400">
+<style>
+:root{--ink:#eaf0ff;--muted:#a9b5d4;--sun:#ffb347;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+html{background:#04050d}
+body{margin:0;color:var(--ink);font:17px/1.65 var(--sans);background:#04050d}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+a{color:var(--sun)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:4px}
+main{position:relative;z-index:1}
+.chap{min-height:110vh;min-height:110svh;display:flex;align-items:center;padding:48px 6vw}
+.card{width:min(460px,100%);background:rgba(6,9,22,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.12);border-left:4px solid var(--c,var(--sun));border-radius:16px;padding:26px 28px;will-change:opacity}
+.who{display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--muted);margin-bottom:10px}
+.who i{width:11px;height:11px;border-radius:50%;background:var(--c,var(--sun));box-shadow:0 0 12px var(--c,var(--sun))}
+h1,h2{font-family:var(--serif);line-height:1.1;margin:0 0 14px;letter-spacing:-.015em}
+h1{font-size:clamp(40px,7vw,68px)}
+h2{font-size:clamp(30px,4.5vw,42px)}
+.card p{margin:0 0 14px;color:#d3dcf3}
+.quote{font:italic 400 clamp(19px,2.6vw,23px)/1.45 var(--serif);color:var(--ink)!important}
+.tag{display:inline-block;font:600 13px var(--sans);padding:2px 11px;border-radius:999px;background:var(--sun);color:#2b1c00;margin-left:8px;vertical-align:middle}
+pre{margin:0 0 14px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 14px;overflow-x:auto;font:13px/1.6 var(--mono);color:#dbe6fb}
+pre b{font-weight:400;color:#f2c46d}
+code{font-family:var(--mono);font-size:.92em;color:#f2c46d}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.btn{display:inline-block;padding:10px 18px;border-radius:10px;border:1.5px solid var(--ink);color:var(--ink);text-decoration:none;font-weight:600;font-size:15px}
+.btn.main{background:var(--sun);border-color:var(--sun);color:#2b1c00}
+.links{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.links a{display:block;padding:11px 16px;border:1px solid rgba(255,255,255,.18);border-radius:10px;color:var(--ink);text-decoration:none;font-weight:600}
+.links a small{display:block;font-weight:400;color:var(--muted)}
+.links a:hover{border-color:var(--sun)}
+.hint{margin-top:18px;font-size:14px;color:var(--muted)}
+.hint span{display:inline-block;animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(6px)}}
+.foot{margin-top:16px;font-size:13px;color:var(--muted)}
+#dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:3;list-style:none;margin:0;padding:0;display:grid;gap:4px}
+#dots a{display:grid;place-items:center;width:26px;height:26px}
+#dots a::before{content:"";width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.3);transition:transform .3s,background .3s}
+#dots a.on::before{background:var(--sun);transform:scale(1.6)}
+#dots span{position:absolute;right:30px;font-size:13px;background:rgba(6,9,22,.85);padding:2px 9px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+#dots a:hover span,#dots a:focus-visible span{opacity:1}
+@media (max-width:760px){
+  .chap{align-items:flex-end;padding:24px 14px 28px}
+  .card{padding:20px 20px}
+  #dots{right:2px}
+  #dots a{width:22px;height:22px}
+}
+@media (prefers-reduced-motion:reduce){.hint span{animation:none}}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Joko Adenur</h1>
-    <p>Kumpulan karya dan proyek saya</p>
-    <a href="https://github.com/jokoadenur">GitHub saya</a>
-  </header>
+<canvas id="sky" aria-hidden="true"></canvas>
+<ol id="dots" aria-label="Navigasi bab"></ol>
 
-  <div id="repos" class="grid">Memuat proyek...</div>
+<main>
+<section class="chap" id="matahari" data-name="Matahari" style="--c:#ffb347">
+  <div class="card">
+    <h1>Joko Ade Nursiyono</h1>
+    <p class="quote">Suka belajar, lalu mengubah yang dipelajari jadi paket R yang bisa dipakai orang lain.</p>
+    <p>Setiap planet di perjalanan ini adalah satu karya saya di GitHub (<strong>jokoadenur</strong>). Gulir pelan untuk menjelajah.</p>
+    <p class="hint"><span>↓</span> Gulir untuk mulai</p>
+  </div>
+</section>
 
-  <script>
-    fetch("https://api.github.com/users/jokoadenur/repos?sort=updated&per_page=100")
-      .then(r => r.json())
-      .then(repos => {
-        const el = document.getElementById("repos");
-        el.innerHTML = "";
-        repos
-          .filter(r => !r.fork)
-          .forEach(r => {
-            el.innerHTML += `
-              <div class="card">
-                <h3><a href="${r.html_url}" target="_blank">${r.name}</a></h3>
-                <p>${r.description || "Belum ada deskripsi"}</p>
-                <div class="meta">${r.language || ""} · ⭐ ${r.stargazers_count}</div>
-              </div>`;
-          });
-      })
-      .catch(() => {
-        document.getElementById("repos").textContent = "Gagal memuat proyek.";
-      });
-  </script>
+<section class="chap" id="merkurius" data-name="Merkurius" style="--c:#c9c2b6">
+  <div class="card">
+    <div class="who"><i></i>Merkurius, planet pertama</div>
+    <h2>numspellR<span class="tag">Di CRAN</span></h2>
+    <p>Mendeteksi persistensi numerik (spell) dan pola kekakuan pada data berurutan waktu. Bekerja dengan vektor dan data frame, dengan keluaran bahasa Indonesia atau Inggris. Versi 0.1.0 terbit di CRAN pada Februari 2026.</p>
+    <pre>install.packages(<b>"numspellR"</b>)
+library(numspellR)</pre>
+    <div class="row"><a class="btn main" href="https://CRAN.R-project.org/package=numspellR">Halaman CRAN</a><a class="btn" href="https://github.com/jokoadenur/numspellR">Kode</a></div>
+  </div>
+</section>
+
+<section class="chap" id="venus" data-name="Venus" style="--c:#e8b86a">
+  <div class="card">
+    <div class="who"><i></i>Venus</div>
+    <h2>bpsuseR</h2>
+    <p>Kumpulan data deret waktu siap pakai dari BPS: PDB triwulanan dan tahunan (miliar rupiah) serta tingkat pengangguran terbuka semesteran. Cocok untuk peneliti, analis, dan mahasiswa.</p>
+    <pre>devtools::install_github(<b>"jokoadenur/bpsuseR"</b>)
+data(pdb_adhk_triwulanan)
+plot(pdb_adhk_triwulanan)</pre>
+    <div class="row"><a class="btn main" href="https://github.com/jokoadenur/bpsuseR">Lihat di GitHub</a></div>
+  </div>
+</section>
+
+<section class="chap" id="bumi" data-name="Bumi" style="--c:#4f9dff">
+  <div class="card">
+    <div class="who"><i></i>Bumi</div>
+    <h2>segmonR</h2>
+    <p>Membuat pie chart dengan gerakan segmen yang bisa diatur. Cukup siapkan data dengan kolom <code>text</code> dan <code>value</code>; warna, grup, dan kategori bersifat opsional.</p>
+    <pre>devtools::install_github(<b>"jokoadenur/segmonR"</b>)
+segmonr(data)</pre>
+    <div class="row"><a class="btn main" href="https://github.com/jokoadenur/segmonR">Lihat di GitHub</a></div>
+  </div>
+</section>
+
+<section class="chap" id="mars" data-name="Mars" style="--c:#e0643f">
+  <div class="card">
+    <div class="who"><i></i>Mars</div>
+    <h2>pdrbuseR</h2>
+    <p>Paket R untuk data PDRB (Produk Domestik Regional Bruto), pendamping bpsuseR di tingkat daerah.</p>
+    <pre>devtools::install_github(<b>"jokoadenur/pdrbuseR"</b>)</pre>
+    <div class="row"><a class="btn main" href="https://github.com/jokoadenur/pdrbuseR">Lihat di GitHub</a></div>
+  </div>
+</section>
+
+<section class="chap" id="jupiter" data-name="Jupiter" style="--c:#d9a066">
+  <div class="card">
+    <div class="who"><i></i>Jupiter</div>
+    <h2>fraudR</h2>
+    <p>Paket R untuk membantu menemukan indikasi kecurangan pada data.</p>
+    <pre>devtools::install_github(<b>"jokoadenur/fraudR"</b>)</pre>
+    <div class="row"><a class="btn main" href="https://github.com/jokoadenur/fraudR">Lihat di GitHub</a></div>
+  </div>
+</section>
+
+<section class="chap" id="saturnus" data-name="Saturnus" style="--c:#e6d29a">
+  <div class="card">
+    <div class="who"><i></i>Saturnus</div>
+    <h2>mywaffleR</h2>
+    <p>Paket R untuk membuat waffle chart, cara visual yang ringkas untuk menunjukkan proporsi.</p>
+    <pre>devtools::install_github(<b>"jokoadenur/mywaffleR"</b>)</pre>
+    <div class="row"><a class="btn main" href="https://github.com/jokoadenur/mywaffleR">Lihat di GitHub</a></div>
+  </div>
+</section>
+
+<section class="chap" id="uranus" data-name="Uranus" style="--c:#7fe0e6">
+  <div class="card">
+    <div class="who"><i></i>Uranus</div>
+    <h2>Masih ada 22 repositori lain</h2>
+    <p>Total ada 28 repositori di akun saya. Bagian ini terus bertambah setiap kali saya belajar sesuatu yang baru.</p>
+    <div class="row"><a class="btn main" href="https://github.com/jokoadenur?tab=repositories">Jelajahi semua repositori</a></div>
+  </div>
+</section>
+
+<section class="chap" id="neptunus" data-name="Neptunus" style="--c:#5b7dff">
+  <div class="card">
+    <div class="who"><i></i>Neptunus, ujung perjalanan</div>
+    <h2>Mari terhubung</h2>
+    <p>Terima kasih sudah menjelajah. Saya Joko Ade Nursiyono, berbasis di Jawa Timur, Indonesia. Semua paket saya berlisensi MIT.</p>
+    <ul class="links">
+      <li><a href="https://github.com/jokoadenur">GitHub<small>github.com/jokoadenur</small></a></li>
+      <li><a href="https://jokoding.com">Situs pribadi<small>jokoding.com</small></a></li>
+      <li><a href="https://jokoadenur.r-universe.dev">R-universe<small>jokoadenur.r-universe.dev</small></a></li>
+    </ul>
+    <p class="foot">© 2026 Joko Ade Nursiyono. <a href="#matahari">Kembali ke Matahari</a></p>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+  var cv=document.getElementById('sky'),ctx=cv.getContext('2d');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var secs=[].slice.call(document.querySelectorAll('.chap'));
+  var N=secs.length;
+  // [nama, radius, orbit, periode(detik), warna terang, warna gelap]
+  var B=[
+    ['Matahari',140,0,0,'#fff3c4','#ffb347'],
+    ['Merkurius',14,330,90,'#d4cdc2','#6e675f'],
+    ['Venus',24,480,140,'#f3d9a0','#a8793a'],
+    ['Bumi',26,640,190,'#7db8ff','#12408a'],
+    ['Mars',18,800,260,'#f08a62','#7a2b14'],
+    ['Jupiter',70,1100,420,'#ecc9a0','#8a5a34'],
+    ['Saturnus',58,1450,600,'#f0dfae','#8f7a45'],
+    ['Uranus',40,1800,800,'#b6f2f4','#2f8e9a'],
+    ['Neptunus',38,2150,1000,'#8aa4ff','#1a2c9a']
+  ].map(function(b,i){return{n:b[0],r:b[1],R:b[2],w:b[3]?6.2832/b[3]:0,a0:i*1.9+.4,c1:b[4],c2:b[5]}});
+
+  var W,H,dpr,ax,ay,base,centers=[],stars=[];
+  for(var s=0;s<260;s++)stars.push({x:Math.random(),y:Math.random(),z:Math.random(),p:Math.random()*6.28,m:.4+Math.random()*1.3});
+
+  function resize(){
+    dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+    cv.width=W*dpr;cv.height=H*dpr;
+    var wide=W>760;ax=wide?W*.7:W*.5;ay=wide?H*.5:H*.26;
+    base=wide?Math.min(W*.24,H*.22):Math.min(W*.26,H*.17);
+    centers=secs.map(function(e){return e.offsetTop+e.offsetHeight/2-H/2});
+  }
+  function pos(i,t){var b=B[i];if(!b.R)return{x:0,y:0};var a=b.a0+b.w*t;return{x:Math.cos(a)*b.R,y:Math.sin(a)*b.R}}
+  function zoomOf(i){return base*(i?1:1.3)/B[i].r}
+  function frac(){
+    var y=scrollY;if(y<=centers[0])return 0;if(y>=centers[N-1])return N-1;
+    for(var i=0;i<N-1;i++)if(y<centers[i+1])return i+(y-centers[i])/(centers[i+1]-centers[i]);
+    return N-1;
+  }
+  var cam={x:0,y:0,z:1},ready=false,P=0;
+
+  function ball(x,y,r,b,sx,sy){
+    var d=Math.hypot(sx,sy)||1,lx=-sx/d,ly=-sy/d;
+    var g=ctx.createRadialGradient(x+lx*r*.45,y+ly*r*.45,r*.08,x,y,r*1.05);
+    g.addColorStop(0,b.c1);g.addColorStop(.62,b.c2);g.addColorStop(1,'#03040a');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,6.2832);ctx.fill();
+  }
+  function bands(x,y,r,cols){
+    ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,6.2832);ctx.clip();
+    var h=r*2/cols.length;
+    cols.forEach(function(c,k){ctx.fillStyle=c;ctx.fillRect(x-r,y-r+k*h,r*2,h+1)});
+    ctx.restore();
+  }
+
+  function draw(t){
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.fillStyle='#04050d';ctx.fillRect(0,0,W,H);
+    // bintang dengan paralaks
+    for(var s=0;s<stars.length;s++){
+      var st=stars[s],f=.02+st.z*.09;
+      var sx=((st.x*W-cam.x*f*cam.z*.1)%W+W)%W,sy=((st.y*H-cam.y*f*cam.z*.1)%H+H)%H;
+      var tw=reduce?1:.7+.3*Math.sin(t*1.5+st.p);
+      ctx.globalAlpha=(.25+st.z*.6)*tw;ctx.fillStyle='#fff';
+      ctx.fillRect(sx,sy,st.m*(.6+st.z),st.m*(.6+st.z));
+    }
+    ctx.globalAlpha=1;
+    ctx.save();
+    ctx.translate(ax,ay);ctx.scale(cam.z,cam.z);ctx.translate(-cam.x,-cam.y);
+    // jalur orbit
+    ctx.lineWidth=1.2/cam.z;ctx.strokeStyle='rgba(160,185,255,.13)';
+    for(var i=1;i<N;i++){ctx.beginPath();ctx.arc(0,0,B[i].R,0,6.2832);ctx.stroke()}
+    // matahari
+    var sr=B[0].r,pulse=reduce?1:1+.025*Math.sin(t*1.2);
+    var gl=ctx.createRadialGradient(0,0,sr*.8,0,0,sr*4.5*pulse);
+    gl.addColorStop(0,'rgba(255,190,80,.55)');gl.addColorStop(.35,'rgba(255,140,40,.16)');gl.addColorStop(1,'rgba(255,120,30,0)');
+    ctx.fillStyle=gl;ctx.beginPath();ctx.arc(0,0,sr*4.5*pulse,0,6.2832);ctx.fill();
+    var sg=ctx.createRadialGradient(-sr*.2,-sr*.2,sr*.1,0,0,sr);
+    sg.addColorStop(0,'#fffbe6');sg.addColorStop(.5,'#ffd36b');sg.addColorStop(1,'#ff9a2e');
+    ctx.fillStyle=sg;ctx.beginPath();ctx.arc(0,0,sr*pulse*.99,0,6.2832);ctx.fill();
+    // planet
+    for(var j=1;j<N;j++){
+      var b=B[j],p=pos(j,t),r=b.r;
+      var ha=ctx.createRadialGradient(p.x,p.y,r*.9,p.x,p.y,r*1.7);
+      ha.addColorStop(0,'rgba(140,180,255,.14)');ha.addColorStop(1,'rgba(140,180,255,0)');
+      ctx.fillStyle=ha;ctx.beginPath();ctx.arc(p.x,p.y,r*1.7,0,6.2832);ctx.fill();
+      if(j===6){ // cincin belakang
+        ctx.save();ctx.translate(p.x,p.y);ctx.rotate(-.38);
+        ctx.strokeStyle='rgba(230,210,160,.55)';ctx.lineWidth=r*.28;
+        ctx.beginPath();ctx.ellipse(0,0,r*1.75,r*.52,0,Math.PI,6.2832);ctx.stroke();ctx.restore();
+      }
+      ball(p.x,p.y,r,b,p.x,p.y);
+      if(j===5)bands(p.x,p.y,r,['rgba(120,70,40,.0)','rgba(150,95,55,.35)','rgba(255,235,205,.18)','rgba(130,80,45,.4)','rgba(255,230,195,.15)','rgba(140,90,50,.35)','rgba(120,70,40,.0)']);
+      if(j===3){ctx.save();ctx.beginPath();ctx.arc(p.x,p.y,r,0,6.2832);ctx.clip();
+        ctx.fillStyle='rgba(70,150,80,.75)';
+        ctx.beginPath();ctx.ellipse(p.x-r*.3,p.y-r*.2,r*.35,r*.25,.5,0,6.2832);ctx.fill();
+        ctx.beginPath();ctx.ellipse(p.x+r*.3,p.y+r*.3,r*.3,r*.2,-.4,0,6.2832);ctx.fill();ctx.restore()}
+      if(j===6){ // cincin depan
+        ctx.save();ctx.translate(p.x,p.y);ctx.rotate(-.38);
+        ctx.strokeStyle='rgba(240,222,170,.8)';ctx.lineWidth=r*.28;
+        ctx.beginPath();ctx.ellipse(0,0,r*1.75,r*.52,0,0,Math.PI);ctx.stroke();ctx.restore();
+      }
+    }
+    ctx.restore();
+  }
+
+  function frame(ms){
+    var t=reduce?0:ms/1000;
+    var p=frac(),i=Math.floor(p),j=Math.min(i+1,N-1),u=p-i;u=u*u*(3-2*u);
+    var a=pos(i,t),b=pos(j,t);
+    var tx=a.x+(b.x-a.x)*u,ty=a.y+(b.y-a.y)*u;
+    var tz=Math.exp(Math.log(zoomOf(i))*(1-u)+Math.log(zoomOf(j))*u);
+    if(!ready||reduce){cam.x=tx;cam.y=ty;cam.z=tz;ready=true}
+    else{var k=.16;cam.x+=(tx-cam.x)*k;cam.y+=(ty-cam.y)*k;cam.z=Math.exp(Math.log(cam.z)+(Math.log(tz)-Math.log(cam.z))*k)}
+    draw(t);
+    // kartu memudar saat menjauh dari tengah layar & titik navigasi
+    var y=scrollY+H/2,act=Math.round(p);
+    for(var s=0;s<N;s++){
+      var e=secs[s],c=e.offsetTop+e.offsetHeight/2,d=Math.abs(c-y)/H;
+      var o=1-Math.min(1,Math.max(0,(d-.28)/.4));
+      e.firstElementChild.style.opacity=reduce?1:o.toFixed(3);
+      dots[s].classList.toggle('on',s===act);
+    }
+    if(!reduce)requestAnimationFrame(frame);
+  }
+
+  var dl=document.getElementById('dots'),dots=[];
+  secs.forEach(function(e){
+    var li=document.createElement('li'),a=document.createElement('a'),sp=document.createElement('span');
+    a.href='#'+e.id;a.setAttribute('aria-label','Menuju '+e.dataset.name);sp.textContent=e.dataset.name;
+    a.appendChild(sp);li.appendChild(a);dl.appendChild(li);dots.push(a);
+  });
+
+  addEventListener('resize',function(){resize();if(reduce)frame(0)});
+  addEventListener('load',function(){resize();if(reduce)frame(0)});
+  if(reduce)addEventListener('scroll',function(){frame(0)},{passive:true});
+  resize();
+  requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
